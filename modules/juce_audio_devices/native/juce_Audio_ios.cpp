@@ -371,7 +371,9 @@ struct iOSAudioIODevice::Pimpl final : public AsyncUpdater
 
         if (category == AVAudioSessionCategoryPlayAndRecord)
         {
-           #if JUCE_IOS_API_VERSION_CAN_BE_BUILT (26, 0)
+           #if MELODICS_JUCE_DISABLE_IOS_BLUETOOTH_AUDIO_INPUT
+            constexpr auto bluetoothOption = 0;
+           #elif JUCE_IOS_API_VERSION_CAN_BE_BUILT (26, 0)
             constexpr auto bluetoothOption = AVAudioSessionCategoryOptionAllowBluetoothHFP;
            #else
             constexpr auto bluetoothOption = AVAudioSessionCategoryOptionAllowBluetooth;
