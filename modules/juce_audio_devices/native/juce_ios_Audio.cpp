@@ -279,7 +279,9 @@ struct iOSAudioIODevice::Pimpl      : public AudioPlayHead,
 
         if (category == AVAudioSessionCategoryPlayAndRecord)
             options |= (AVAudioSessionCategoryOptionDefaultToSpeaker
+                     #if ! MELODICS_JUCE_DISABLE_IOS_BLUETOOTH_AUDIO_INPUT
                       | AVAudioSessionCategoryOptionAllowBluetooth
+                     #endif
                       | AVAudioSessionCategoryOptionAllowBluetoothA2DP);
 
         JUCE_NSERROR_CHECK ([[AVAudioSession sharedInstance] setCategory: category
